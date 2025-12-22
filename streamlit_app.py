@@ -27,7 +27,7 @@ if 'latest_name' not in st.session_state:
     st.session_state.latest_name = None
 
 # --- UI Implementation ---
-st.title("Minimal Name Matcher")
+st.title("Name Generator and Verifier (Jiwon Park)")
 
 # 2. Stored Name Display: Always show the currently stored name at the top.
 st.header("Stored Name")
