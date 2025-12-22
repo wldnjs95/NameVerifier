@@ -1,0 +1,2 @@
+"""Core verification logic."""
+
