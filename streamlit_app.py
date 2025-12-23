@@ -27,7 +27,8 @@ if 'latest_name' not in st.session_state:
 # --- UI ---
 st.title("Name Generator and Verifier (Jiwon Park)")
 
-# 2. Stored Name Display: Show the currently stored name at the top.
+# 2. Stored Name Display
+# Show the currently stored name at the top.
 st.header("Lastest Generated Name")
 if st.session_state.latest_name:
     st.success(f"**{st.session_state.latest_name}**")
@@ -36,22 +37,25 @@ else:
 st.divider()
 
 
-# 3. Name Generation: Provide a prompt to generate and store a single name.
+# 3. Name Generation
+# Provide a prompt to generate and store a single name.
+
 st.header("1. Generate and Store a Name")
 st.caption("Example Prompt: Please generate a random Arabic sounding name with an Al and ibn both involved. The name shouldn't be longer than 5 words.")
 generation_prompt = st.text_area(
-    "Enter a prompt to generate a single name:"
+    "Enter a prompt to generate a single name (Leaving the prompt empty will generate a random name):"
 )
 
 if st.button("Generate Name"):
-    if generation_prompt:
-        with st.spinner("Generating name..."):
-            # When a new name is generated, it overwrites the previous one.
-            st.session_state.latest_name = generate_name(generation_prompt)
-        # Rerun the script to immediately update the "Stored Name" display at the top.
-        st.rerun()
-    else:
-        st.warning("Please enter a prompt to generate a name.")
+    with st.spinner("Generating name..."):
+        # If prompt is empty, use a default prompt for random name generation
+        if not generation_prompt or not generation_prompt.strip():
+            generation_prompt = "Generate a random name."
+        
+        # When a new name is generated, it overwrites the previous one.
+        st.session_state.latest_name = generate_name(generation_prompt)
+    # Rerun the script to immediately update the "Stored Name" display at the top.
+    st.rerun()
 st.divider()
 
 
