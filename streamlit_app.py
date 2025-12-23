@@ -25,11 +25,12 @@ if 'latest_name' not in st.session_state:
     st.session_state.latest_name = None
 
 # --- UI ---
-st.title("Name Generator and Verifier (Jiwon Park)")
+st.title("Name Generator and Verifier")
+st.caption("Jiwon Park / jiwon.park.engineer@gmail.com")
 
 # 2. Stored Name Display
 # Show the currently stored name at the top.
-st.header("Lastest Generated Name")
+st.header("Latest Generated Name")
 if st.session_state.latest_name:
     st.success(f"**{st.session_state.latest_name}**")
 else:
