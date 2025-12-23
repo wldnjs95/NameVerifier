@@ -2,6 +2,17 @@
 import anthropic
 from config.settings import ANTHROPIC_API_KEY, CLAUDE_MODEL
 
+# Validate API key before initializing client
+if not ANTHROPIC_API_KEY:
+    raise ValueError(
+        "ANTHROPIC_API_KEY is not set. Please set it in your .env file or environment variables."
+    )
+
+if not CLAUDE_MODEL:
+    raise ValueError(
+        "CLAUDE_MODEL is not set. Please set it in your .env file or environment variables."
+    )
+
 # Initialize Anthropic Claude client
 client = anthropic.Anthropic(
     api_key=ANTHROPIC_API_KEY
