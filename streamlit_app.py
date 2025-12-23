@@ -6,7 +6,6 @@ import re
 
 # --- Path Setup ---
 # Add the project root to the Python path to allow importing local modules.
-# This is necessary because we are only modifying this single file.
 project_root = os.path.abspath(os.path.dirname(__file__))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
@@ -42,7 +41,7 @@ st.divider()
 st.header("1. Generate and Store a Name")
 generation_prompt = st.text_area(
     "Enter a prompt to generate a single name:",
-    placeholder="e.g., An English name for a male protagonist in a sci-fi novel."
+    placeholder="e.g., An English name for a male in a novel."
 )
 
 if st.button("Generate Name"):
