@@ -18,6 +18,42 @@ except ImportError as e:
     st.error(f"Failed to import necessary functions: {e}")
     st.info("Please ensure the project structure is correct and all required files exist.")
     st.stop()
+    
+    
+    
+# --- Password Protection ---
+def check_password():
+    """Check password from Streamlit secrets."""
+    # Get password from Streamlit secrets, fallback to environment variable
+    try:
+        correct_password = st.secrets.get("APP_PASSWORD", os.getenv("APP_PASSWORD", None))
+    except (AttributeError, FileNotFoundError):
+        correct_password = os.getenv("APP_PASSWORD", None)
+    
+    if not correct_password:
+        st.error("Password not configured. Please set APP_PASSWORD in secrets or environment variables.")
+        st.stop()
+        return False
+    
+    def password_entered():
+        if st.session_state["password"] == correct_password:
+            st.session_state["password_correct"] = True
+            del st.session_state["password"]
+        else:
+            st.session_state["password_correct"] = False
+
+    if "password_correct" not in st.session_state:
+        st.text_input("Please enter the password to access this app", type="password", on_change=password_entered, key="password")
+        return False
+    elif not st.session_state["password_correct"]:
+        st.text_input("Please enter the password to access this app", type="password", on_change=password_entered, key="password")
+        st.error("Password incorrect")
+        return False
+    else:
+        return True
+
+if not check_password():
+    st.stop()
 
 # --- App State Initialization ---
 # 1. The app state is managed by a single variable in the session state.
