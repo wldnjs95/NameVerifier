@@ -95,9 +95,9 @@ else:
                     
                     # Display a simple, human-readable result first.
                     if result_data.get("match"):
-                        st.success("✅ The names are considered a match.")
+                        st.success("✅ Names match")
                     else:
-                        st.error("❌ The names are not considered a match.")
+                        st.error("❌ Names do not match.")
                     
                     # Then display the JSON details below.
                     st.json(result_data)
