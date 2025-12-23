@@ -54,7 +54,7 @@ if st.button("Generate Name"):
         if not generation_prompt or not generation_prompt.strip():
             generation_prompt = "Generate a random name."
         
-        # When a new name is generated, it overwrites the previous one.
+        # When a new name is generated, overwrite the previous one.
         st.session_state.latest_name = generate_name(generation_prompt)
     # Rerun the script to immediately update the "Stored Name" display at the top.
     st.rerun()
@@ -75,15 +75,13 @@ else:
 
     if st.button("Match Candidate"):
         if candidate_name:
-            with st.spinner("Performing match using Algorithm 2..."):
-                # Explicitly use Algorithm 2 for matching, as per requirements.
+            with st.spinner("Performing match ..."):
                 result_json_str = verify_name_algorithm2(
                     st.session_state.latest_name,
                     candidate_name
                 )
-
-                # Display the match result clearly.
-                st.subheader("Match Result (Algorithm 2)")
+                
+                st.subheader("Match Result")
                 try:
                     # Pre-process the string to remove markdown fences before parsing.
                     cleaned_str = result_json_str.strip()
@@ -94,13 +92,15 @@ else:
 
                     # Attempt to parse the cleaned string.
                     result_data = json.loads(cleaned_str)
-                    st.json(result_data)
-
-                    # Also provide a simple, human-readable result.
+                    
+                    # Display a simple, human-readable result first.
                     if result_data.get("match"):
                         st.success("✅ The names are considered a match.")
                     else:
                         st.error("❌ The names are not considered a match.")
+                    
+                    # Then display the JSON details below.
+                    st.json(result_data)
 
                 except (json.JSONDecodeError, TypeError):
                     # If parsing still fails, show the raw string response.
