@@ -11,7 +11,6 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 # --- Function Imports ---
-# Import the specific functions required by the objective.
 try:
     from core.name_generator import generate_name
     from algorithms.algorithm2 import verify_name_algorithm2
@@ -25,11 +24,11 @@ except ImportError as e:
 if 'latest_name' not in st.session_state:
     st.session_state.latest_name = None
 
-# --- UI Implementation ---
+# --- UI ---
 st.title("Name Generator and Verifier (Jiwon Park)")
 
-# 2. Stored Name Display: Always show the currently stored name at the top.
-st.header("Stored Name")
+# 2. Stored Name Display: Show the currently stored name at the top.
+st.header("Lastest Generated Name")
 if st.session_state.latest_name:
     st.success(f"**{st.session_state.latest_name}**")
 else:
@@ -39,9 +38,9 @@ st.divider()
 
 # 3. Name Generation: Provide a prompt to generate and store a single name.
 st.header("1. Generate and Store a Name")
+st.caption("Example Prompt: Please generate a random Arabic sounding name with an Al and ibn both involved. The name shouldn't be longer than 5 words.")
 generation_prompt = st.text_area(
-    "Enter a prompt to generate a single name:",
-    placeholder="e.g., An English name for a male in a novel."
+    "Enter a prompt to generate a single name:"
 )
 
 if st.button("Generate Name"):
