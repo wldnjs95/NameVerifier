@@ -42,8 +42,9 @@ st.divider()
 
 st.header("1. Generate and Store a Name")
 st.caption("Example Prompt: Please generate a random Arabic sounding name with an Al and ibn both involved. The name shouldn't be longer than 5 words.")
+st.caption("* Leaving the prompt empty will generate a random name.")
 generation_prompt = st.text_area(
-    "Enter a prompt to generate a single name (Leaving the prompt empty will generate a random name):"
+    "Enter a prompt to generate a single name:"
 )
 
 if st.button("Generate Name"):
